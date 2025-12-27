@@ -1,0 +1,91 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Travel',
+                typeNamePlural: 'Travels',                
+                title: { 
+                    type: #STANDARD, 
+                    value: 'TravelUUID' }, 
+                
+                description: { 
+                    type: #STANDARD, 
+                    value: 'TravelID'
+                }
+                
+              }
+
+ // presentationVariant: [{ sortOrder: [{ by: 'TravelID', direction:  #DESC }] }]
+   }
+
+annotate entity ZACH_C_TRAVELTP
+    with 
+{
+   
+    @UI.facet: [ { id:              'Travel',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Travel',
+                   position:        10 },
+                 { id:              'Booking',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Booking',
+                   position:        20,
+                   targetElement:   '_Booking'} ]
+  
+  @UI: { hidden: true }
+  @UI:{ identification: [{ position: 1, label: 'Travel UUID' }] }
+  Traveluuid;
+  @UI: {  lineItem:       [ { position: 10, label: 'Travel ID' } ],
+          identification: [ { position: 10, label: 'Travel ID' } ],
+          selectionField: [ { position: 10 } ] }
+  Travelid;
+  @UI: {  lineItem:       [ { position: 20, label: 'Customer ID' } ],
+         identification: [ { position: 20, label: 'Customer ID' } ],
+         selectionField: [ { position: 20 } ] }
+  Customerid;
+  @UI: { lineItem:       [ { position: 30, label: 'Begin Date' } ],
+         identification: [ { position: 30, label: 'Begin Date' } ] }
+  Begindate;
+  @UI: {  lineItem:       [ { position: 40, label: 'End Date' } ],
+         identification: [ { position: 40,  label: 'End Date' } ] }
+  Enddate;
+  @UI: {  lineItem:       [ { position: 50, label: 'Booking Fee' } ],
+          identification: [ { position: 50, label: 'Booking Fee' } ] }
+  Bookingfee;
+
+  @UI: {  lineItem:       [ { position: 90, label: 'TotalPrice' } ],
+         identification: [ { position: 90, label: 'TotalPrice' } ] }
+  Totalprice;
+  @UI: {  lineItem:       [ { position: 100, label: 'Currency Code' } ],
+          identification: [ { position: 100, label: 'Currency Code' } ] }
+  Currencycode;
+ @UI: {  lineItem:       [ { position: 70, label: 'TravelStatus' },
+                              { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' },
+                              { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }
+                            ],
+            identification: [ { position: 70, label: 'Status' },
+                              { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' },
+                              { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }
+                            ] }
+  Overallstatus;
+  @UI: {  lineItem:       [ { position: 80, label: 'Description' } ],
+          identification: [ { position: 80, label: 'Description' } ] }
+  Description;
+  @UI: {  lineItem:       [ { position: 110, label: 'Created By' } ],
+          identification: [ { position: 110, label: 'Created By' } ] }
+  Createdby;
+  @UI: {  lineItem:       [ { position: 120, label: 'Created Date' } ],
+          identification: [ { position: 120, label: 'Created Date' } ] }
+  Createdat;
+  @UI: {  lineItem:       [ { position: 130, label: 'Last Changed By' } ],
+          identification: [ { position: 130, label: 'Last Changed By' } ] }
+  Lastchangedby;
+  @UI: {  lineItem:       [ { position: 140, label: 'Last Changed Date' } ],
+          identification: [ { position: 140, label: 'Last Changed Date' } ] }
+  Lastchangedat;
+  @UI: {  lineItem:       [ { position: 150, label: 'Local Last Changed Date' } ],
+          identification: [ { position: 150, label: 'Local Last Changed Date' } ] }
+  Locallastchangedat;
+    
+}

@@ -1,0 +1,5 @@
+CLASS zbp_ach_r_traveltp DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zach_r_traveltp.
+ENDCLASS.
+
+CLASS zbp_ach_r_traveltp IMPLEMENTATION.
+ENDCLASS.

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition'
+define service ZACH_UI_TRAVEL {
+  expose ZACH_C_TRAVELTP  as Travel;
+  expose ZACH_C_BOOKINGTP as Booking;
+}

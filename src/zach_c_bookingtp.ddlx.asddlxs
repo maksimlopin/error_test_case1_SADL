@@ -1,0 +1,50 @@
+@Metadata.layer:  #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Booking',
+                typeNamePlural: 'Bookings',                
+                title: { 
+                    type: #STANDARD, 
+                    value: 'BookingUUID' }, 
+                
+                description: { 
+                    type: #STANDARD, 
+                    value: 'BookingID'
+                }
+                
+              }
+
+ // presentationVariant: [{ sortOrder: [{ by: 'TravelID', direction:  #DESC }] }]
+   }
+
+annotate entity ZACH_C_BOOKINGTP
+    with 
+{
+   
+  @UI.facet: [ { id:            'Booking',
+                   purpose:       #STANDARD,
+                   type:          #IDENTIFICATION_REFERENCE,
+                   label:         'Booking',
+                   position:      10 }  ]
+
+  @UI: { identification: [ { position: 10, label: 'Booking UUID'  } ] }
+  Bookinguuid;
+  @UI.hidden: true
+  Traveluuid;
+  @UI: { lineItem:       [ { position: 20, label: 'Booking ID' } ],
+        identification: [ { position: 20, label: 'Booking ID' } ] }
+  Bookingid;
+  @UI: { lineItem:       [ { position: 30, label: 'Booking Date' } ],
+       identification: [ { position: 30, label: 'Booking Date' } ] }
+  Bookingdate;
+  @UI: { lineItem:       [ { position: 40, label: 'Customer ID' } ],
+       identification: [ { position: 40, label: 'Customer ID' } ] }
+  Customerid;
+  @UI: { lineItem:       [ { position: 50, label: 'Flight Date' } ],
+       identification: [ { position: 50, label: 'Flight Date' } ] }
+  Flightdate;
+  @UI: { lineItem:       [ { position: 60, label: 'Flight Price' } ],
+       identification: [ { position: 60, label: 'Flight Price' } ] }
+  Flightprice;
+  
+}

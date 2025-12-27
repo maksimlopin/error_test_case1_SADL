@@ -1,0 +1,84 @@
+managed implementation in class zbp_ach_r_traveltp unique;
+with draft;
+
+define behavior for ZACH_R_TRAVELTP alias Travel
+persistent table zlxtravel
+draft table zlxdtravel
+
+lock master total etag Lastchangedat
+//authorization master ( instance )
+etag master Locallastchangedat
+
+{
+  create;
+  update;
+  delete;
+  association _Booking { create; with draft; }
+
+  field ( numbering : managed, readonly ) Traveluuid;
+  field ( readonly : update ) Customerid;
+  field ( readonly ) Overallstatus, Travelid;
+
+
+  validation validateDates on save { field Begindate, Enddate; create; }
+  validation validateCustomerId on save { field Customerid; create; }
+
+  determination setInitialStatus on save { field Overallstatus; create;  }
+  determination calcTravelID on save { field TravelID; create; }
+
+  action ( features : instance ) acceptTravel result [1] $self;
+  action ( features : instance ) rejectTravel result [1] $self;
+
+
+
+  mapping for zlxtravel
+  {
+    TravelUUID = traveluuid;
+    TravelID = travelid;
+    CustomerID = customerid;
+    BeginDate = begindate;
+    EndDate = enddate;
+    BookingFee = bookingfee;
+    TotalPrice = totalprice;
+    CurrencyCode = currencycode;
+    OverallStatus = overallstatus;
+    Description = description;
+    CreatedBy = createdby;
+    CreateDat = createdat;
+    LastChangedBy = lastchangedby;
+    LastChangeDat = lastchangedat;
+    LocalLastChangeDat = locallastchangedat;
+
+  }
+
+}
+
+define behavior for ZACH_R_BOOKINGTP alias Booking
+persistent table zlxbooking
+draft table zlxdbooking
+lock dependent by _Travel
+//authorization dependent by _Travel
+etag master Locallastchangedat
+{
+  update;
+  delete;
+  field ( readonly ) Traveluuid;
+  association _Travel { with draft; }
+  field( numbering : managed, readonly ) Bookinguuid;
+
+   mapping for zlxbooking
+  {
+    BookingUUID = bookinguuid;
+    TravelUUID = traveluuid;
+    BookingID = bookingid;
+    BookingDate = bookingdate;
+    CustomerID = customerid;
+    FlightDate = flightdate;
+    FlightPrice = flightprice;
+    CurrencyCode = currencycode;
+    CreatedBy = createdby;
+    LastChangedBy = lastchangedby;
+    LocalLastChangeDat = locallastchangedat;
+  }
+
+}

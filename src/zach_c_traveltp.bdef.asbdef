@@ -1,0 +1,22 @@
+projection;
+use draft;
+
+define behavior for ZACH_C_TRAVELTP alias Travel
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Booking { create; with draft; }
+
+  use action acceptTravel;
+  use action rejectTravel;
+}
+
+define behavior for ZACH_C_BOOKINGTP alias Booking
+{
+  use update;
+  use delete;
+
+  use association _Travel { with draft; }
+}
